@@ -64,10 +64,10 @@ public class QuadraticProbingHashTable {
         int i = hash32(key), h = 1;
         while (keys[i] != null)
         {
-            if (keys[i].equals(key))
-                return vals[i];
+            if (keys[i].equals(key)){
+                System.out.println("Значение за данным ключом равно: " + vals[i]);
+                return vals[i];}
             i = (i + h * h++) % maxSize;
-            System.out.println("i "+ i);
             if(currentSize == maxSize){
                 break;
             }
