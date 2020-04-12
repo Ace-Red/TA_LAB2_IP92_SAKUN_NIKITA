@@ -30,7 +30,7 @@ public class QuadraticProbingHashTable {
             rv ^= key.charAt(i);
             rv *= hash32Prime;
         }
-        return rv;
+        return Math.abs(rv%maxSize);
     }
     //метод всавки
     public void insert(String key, String val)
@@ -51,7 +51,7 @@ public class QuadraticProbingHashTable {
                 vals[i] = val;
                 return;
             }
-            i = (i + h * h++) % maxSize;
+            i = (tmp + h * h++) % maxSize;
         } while (i != tmp);
     }
     //метод поиска элемента
@@ -64,6 +64,9 @@ public class QuadraticProbingHashTable {
                 return vals[i];
             i = (i + h * h++) % maxSize;
             System.out.println("i "+ i);
+            if(currentSize == maxSize){
+                break;
+            }
         }
         return null;
     }
