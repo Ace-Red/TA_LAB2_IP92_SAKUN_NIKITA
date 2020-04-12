@@ -1,7 +1,8 @@
 public class QuadraticProbingHashTable {
     //текущий размер для вывода текущего заполнения матрицы и максимальный размер для установки размера массивов ключей и значений
     private int currentSize, maxSize;
-    //кон
+    private static int colize = 0;
+    //константы для линейного пробирования
     private static final int hash32Init = 0x811c9dc5;
     private static final int hash32Prime = 0x01000193;
     //ключ по которому мы будем искать значение
@@ -35,6 +36,7 @@ public class QuadraticProbingHashTable {
     //метод всавки
     public void insert(String key, String val)
     {
+        System.out.println(key+" "+val);
         int tmp = hash32(key);
         int i = tmp, h = 1;
         do
@@ -51,7 +53,9 @@ public class QuadraticProbingHashTable {
                 vals[i] = val;
                 return;
             }
-            i = (tmp + h * h++) % maxSize;
+            colize++;
+            i = (tmp + h * h) % maxSize;
+            h++;
         } while (i != tmp);
     }
     //метод поиска элемента
