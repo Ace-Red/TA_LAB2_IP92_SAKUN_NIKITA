@@ -40,7 +40,7 @@ public class QuadraticProbingHashTable {
         int tmp = hash32(key);
         int i = tmp, h = 1;
         do
-        {
+        {colize++;
             if (keys[i] == null)
             {
                 keys[i] = key;
@@ -48,26 +48,29 @@ public class QuadraticProbingHashTable {
                 currentSize++;
                 return;
             }
+            colize++;
             if (keys[i].equals(key))
             {
                 vals[i] = val;
                 return;
             }
-            colize++;
             i = (tmp + h * h) % maxSize;
             h++;
+            colize++;
         } while (i != tmp);
     }
     //метод поиска элемента
     public String get(String key)
     {
         int i = hash32(key), h = 1;
+        colize++;
         while (keys[i] != null)
-        {
+        {   colize++;
             if (keys[i].equals(key)){
                 System.out.println("Значение за данным ключом равно: " + vals[i]);
                 return vals[i];}
-            i = (i + h * h++) % maxSize;
+
+            i = (hash32(key) + h * h++) % maxSize;
             if(currentSize == maxSize){
                 break;
             }
@@ -75,4 +78,7 @@ public class QuadraticProbingHashTable {
         return null;
     }
 
+    public static int getColize() {
+        return colize;
+    }
 }
